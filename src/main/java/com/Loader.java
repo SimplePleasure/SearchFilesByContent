@@ -11,7 +11,7 @@ public class Loader {
             JFrame frame = new JFrame();
             Form swing = new Form();
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            frame.setSize(600, 400);
+            frame.setSize(650, 400);
             frame.setLocationRelativeTo(null);
             frame.setContentPane(swing.getRootPanel());
             frame.setVisible(true);

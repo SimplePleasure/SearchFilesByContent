@@ -18,6 +18,7 @@ public class Form {
     private JTextField pathField;
     private JTextArea resultArea;
     private JButton searchMatches;
+    private JLabel info;
 
 
     public Form() {
@@ -30,10 +31,14 @@ public class Form {
                     String path = pathField.getText();
                     String pattern = patternField.getText();
                     if (new File(path).exists() && pattern.length() > 0) {
-                        resultArea.setText("");
                         List<String> matches = Processor.getMatches(path, pattern);
+                        info.setText("Matches found: " + matches.size());
                         matches.forEach(x -> resultArea.append(x + "\n"));
+                    } else {
+                        info.setText("Проверьте правильность введённых данных.");
                     }
+                } catch (OutOfMemoryError ex) {
+                    info.setText("Слишком большая вложенность. Попробуйте сократить область поиска.");
                 } finally {
                     searchMatches.setEnabled(true);
                 }
