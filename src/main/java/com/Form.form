@@ -117,7 +117,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="b05b8" class="javax.swing.JTextArea" binding="resultArea">
+              <component id="8afd3" class="javax.swing.JList" binding="resultArea">
                 <constraints/>
                 <properties/>
               </component>

@@ -10,19 +10,24 @@ import java.util.List;
 
 public class Form {
     private JPanel rootPanel;
+    private JPanel dataPanel;
     private JPanel contentPanel;
     private JPanel buttonPanel;
-    private JPanel dataPanel;
 
-    private JTextField patternField;
+    private final DefaultListModel<String> dml;
+    private JList<String> resultArea;
     private JTextField pathField;
-    private JTextArea resultArea;
-    private JButton searchMatches;
+    private JTextField patternField;
     private JLabel info;
+    private JButton searchMatches;
+
 
 
     public Form() {
+        dml = new DefaultListModel<>();
+        resultArea.setModel(dml);
         dataPanel.setLayout(new BoxLayout(dataPanel, BoxLayout.Y_AXIS));
+
         searchMatches.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,13 +37,15 @@ public class Form {
                     String pattern = patternField.getText();
                     if (new File(path).exists() && pattern.length() > 0) {
                         List<String> matches = Processor.getMatches(path, pattern);
-                        info.setText("Matches found: " + matches.size());
-                        matches.forEach(x -> resultArea.append(x + "\n"));
+                        dml.clear();
+                        dml.addAll(matches);
+                        info.setText("Matches found: " + dml.size());
+
                     } else {
                         info.setText("Проверьте правильность введённых данных.");
                     }
                 } catch (OutOfMemoryError ex) {
-                    info.setText("Слишком большая вложенность. Попробуйте сократить область поиска.");
+                    info.setText("Превышен лимит по памяти. Попробуйте сократить область поиска.");
                 } finally {
                     searchMatches.setEnabled(true);
                 }
