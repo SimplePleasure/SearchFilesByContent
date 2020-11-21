@@ -11,6 +11,13 @@
     <groupId>searcher</groupId>
     <artifactId>SearchMatches</artifactId>
     <version>1.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>forms_rt</artifactId>
+            <version>7.0.3</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -33,6 +40,25 @@
                             <mainClass>com.Loader</mainClass>
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>ideauidesigner-maven-plugin</artifactId>
+                <version>1.0-beta-1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>javac2</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <fork>true</fork>
+                    <debug>true</debug>
+                    <failOnError>true</failOnError>
                 </configuration>
             </plugin>
         </plugins>
